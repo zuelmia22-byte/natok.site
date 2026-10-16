@@ -1,0 +1,16 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "natok"
+    label: "নাটক পোস্ট"
+    folder: "posts"
+    create: true
+    fields:
+      - {label: "নাটকের শিরোনাম", name: "title", widget: "string"}
+      - {label: "তারিখ", name: "date", widget: "datetime"}
+      - {label: "Adsterra Link", name: "adlink", widget: "string"}
