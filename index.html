@@ -1,61 +1,14 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>বাংলা নাটক</title>
-  
-  <!-- Netlify Identity Widget (পাসওয়ার্ড সেট ও লগইনের জন্য আবশ্যক) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>বাংলা নাটক - অ্যাডমিন প্যানেল</title>
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-  <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      text-align: center; 
-      padding: 50px 20px; 
-      background-color: #f4f4f9; 
-    }
-    h1 { 
-      color: #333; 
-    }
-    p {
-      color: #555;
-      font-size: 18px;
-    }
-    a.admin-btn { 
-      display: inline-block; 
-      margin-top: 20px; 
-      padding: 12px 24px; 
-      background-color: #0070f3; 
-      color: white; 
-      text-decoration: none; 
-      border-radius: 5px; 
-      font-weight: bold; 
-      font-size: 16px;
-    }
-    a.admin-btn:hover {
-      background-color: #0051a8;
-    }
-  </style>
 </head>
 <body>
-
-  <h1>বাংলা নাটক ওয়েবসাইটে স্বাগতম!</h1>
-  <p>আমাদের নাটক পোস্ট প্যানেলে যেতে নিচের বাটনে ক্লিক করুন:</p>
-  <a class="admin-btn" href="/admin/">অ্যাডমিন প্যানেলে যান</a>
-
-  <!-- অটোমেটিক রিডাইরেক্ট স্ক্রিপ্ট -->
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  </script>
-
+  <!-- Decap CMS Script -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
