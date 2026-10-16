@@ -1,91 +1,14 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>বাংলা নাটক</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'SolaimanLipi', Arial, sans-serif; background-color: #f8f9fa; color: #333; }
-    header { background-color: #212529; color: white; padding: 20px 10px; text-align: center; }
-    header h1 { margin-bottom: 10px; font-size: 26px; }
-    header a.admin-btn { display: inline-block; padding: 6px 14px; background: #0d6efd; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; }
-    .container { max-width: 1000px; margin: 30px auto; padding: 0 15px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-    .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s; }
-    .card:hover { transform: translateY(-4px); }
-    .card img { width: 100%; height: 180px; object-fit: cover; background-color: #eee; }
-    .card-content { padding: 15px; }
-    .card-title { font-size: 18px; margin-bottom: 8px; color: #0d6efd; }
-    .card-date { font-size: 12px; color: #888; margin-bottom: 10px; }
-    .card-body { font-size: 14px; color: #555; line-height: 1.5; margin-bottom: 15px; }
-    .watch-btn { display: inline-block; padding: 8px 16px; background-color: #198754; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: bold; width: 100%; text-align: center; }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager</title>
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-
-  <header>
-    <h1>বাংলা নাটক ডিরেক্টরি</h1>
-    <a class="admin-btn" href="/admin/">অ্যাডমিন প্যানেল (পোস্ট করুন)</a>
-  </header>
-
-  <div class="container">
-    <div id="natok-list" class="grid">
-      <p style="text-align: center; grid-column: 1/-1;">নাটক লোড হচ্ছে...</p>
-    </div>
-  </div>
-
-  <script>
-    async function loadPosts() {
-      const listContainer = document.getElementById('natok-list');
-      try {
-        // GitHub API দিয়ে posts ফোল্ডারের ফাইলগুলো পড়া হচ্ছে
-        const res = await fetch('https://api.github.com/repos/zuelmia22-byte/natok.site/contents/posts');
-        if (!res.ok) throw new Error('No posts');
-        const files = await res.json();
-        
-        listContainer.innerHTML = '';
-
-        for (let file of files) {
-          if (file.name.endsWith('.md')) {
-            const rawRes = await fetch(file.download_url);
-            const text = await rawRes.text();
-            
-            // Frontmatter পার্স করা
-            const titleMatch = text.match(/title:\s*"(.*?)"|title:\s*(.*)/);
-            const dateMatch = text.match(/date:\s*"(.*?)"|date:\s*(.*)/);
-            const imageMatch = text.match(/image:\s*"(.*?)"|image:\s*(.*)/);
-            const adMatch = text.match(/ad_link:\s*"(.*?)"|ad_link:\s*(.*)/);
-            
-            const title = titleMatch ? (titleMatch[1] || titleMatch[2]) : 'নাটক';
-            const date = dateMatch ? (dateMatch[1] || dateMatch[2]).split('T')[0] : '';
-            const image = imageMatch ? (imageMatch[1] || imageMatch[2]) : '';
-            const adLink = adMatch ? (adMatch[1] || adMatch[2]) : '#';
-            
-            // Body অংশ নেওয়া
-            const bodyContent = text.split('---').slice(2).join('---').trim();
-
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-              ${image ? `<img src="${image}" alt="${title}">` : '<div style="height:150px;background:#eee;display:flex;align-items:center;justify-content:center;color:#aaa;">ছবি নেই</div>'}
-              <div class="card-content">
-                <h2 class="card-title">${title}</h2>
-                <div class="card-date">${date}</div>
-                <p class="card-body">${bodyContent.substring(0, 80)}...</p>
-                <a class="watch-btn" href="${adLink}" target="_blank">এখনই দেখুন</a>
-              </div>
-            `;
-            listContainer.appendChild(card);
-          }
-        }
-      } catch (err) {
-        listContainer.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">এখনো কোনো নাটক পোস্ট করা হয়নি।</p>';
-      }
-    }
-
-    loadPosts();
-  </script>
-
+  <!-- Decap CMS Script -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
